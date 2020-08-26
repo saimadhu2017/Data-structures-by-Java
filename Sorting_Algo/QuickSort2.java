@@ -1,8 +1,8 @@
 package Sorting_Algo;
-
+//This QuickSort is based on pivot element first
 import java.util.Scanner;
-//This Quick Sort is Pivot element last
-public class QuickSort {
+
+public class QuickSort2{
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
         int n=sc.nextInt();
@@ -26,22 +26,27 @@ public class QuickSort {
         }
     }
     public static int helperQuickSort(int[] arr,int low,int high){
-        int pivot=arr[high];
-        int i=low-1;
-        for(int j=low;j<high;j++){
-            if(arr[j]<=pivot){
+        int pivot=arr[low];
+        int j=high+1;
+        int i=low;
+        while(i<=j){
+            i++;
+            while(i<high+1 && pivot>arr[i]){
                 i++;
+            }
+            j--;
+            while(j>low && pivot<arr[j]){
+                j--;
+            }
+            if(i<j){
                 int temp=arr[j];
                 arr[j]=arr[i];
                 arr[i]=temp;
             }
         }
-        int temp=arr[i+1];
-        arr[i+1]=arr[high];
-        arr[high]=temp;
-        return(i+1);
+        int temp=arr[j];
+        arr[j]=arr[low];
+        arr[low]=temp;
+        return(j);
     }
 }
-
-//Time complexity is O(nlogn) for best and average
-//Time complexity for worst is O(n^2)
